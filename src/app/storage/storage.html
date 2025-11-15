@@ -1,0 +1,16 @@
+<div class="container mt-4">
+  <h2>Storage Barang</h2>
+
+  <form (ngsubmit)="addItem()" class="mb-3">
+    <input class="form-control mb-2" (ngModel)="newName" (input)="newName = $event.target.value" placeholder="Nama Barang" required >
+    <input class="form-control mb-2" (ngModel)="newQty" (input)="newQty = $event.target.valueAsNumber" type="number" placeholder="Jumlah Barang" required >
+    <button type="submit" class="btn btn-primary w-100">Tambah</button>
+  </form>
+
+  <ul class="list-group">
+    <li *ngFor="let item of items" class="list-group-item d-flex justify-content-between">
+      {{ item.name }} - Jumlah: {{ item.quantity }}
+      <button class="btn btn-danger btn-sm" (click)="delete(item.id)">Hapus</button>
+    </li>
+  </ul>
+</div>
