@@ -8,9 +8,11 @@
   </form>
 
   <ul class="list-group">
-    <li *ngFor="let item of items" class="list-group-item d-flex justify-content-between">
-      {{ item.name }} - Jumlah: {{ item.quantity }}
-      <button class="btn btn-danger btn-sm" (click)="delete(item.id)">Hapus</button>
-    </li>
+    @for (item of items; track item.id) {
+      <li class="list-group-item d-flex justify-content-between">
+        {{ item.name }} - Jumlah: {{ item.quantity }}
+        <button class="btn btn-danger btn-sm" (click)="delete(item.id)">Hapus</button>
+      </li>
+    }
   </ul>
 </div>
