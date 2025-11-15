@@ -1,18 +1,31 @@
 <div class="container mt-4">
   <h2>Storage Barang</h2>
 
-  <form (ngsubmit)="addItem()" class="mb-3">
-    <input class="form-control mb-2" (ngModel)="newName" (input)="newName = $event.target.value" placeholder="Nama Barang" required >
-    <input class="form-control mb-2" (ngModel)="newQty" (input)="newQty = $event.target.valueAsNumber" type="number" placeholder="Jumlah Barang" required >
+  <form (submit)="addItem(); $event.preventDefault()" class="mb-3">
+    <input class="form-control mb-2" [(ngModel)]="newName" name="name" placeholder="Nama Barang" required >
+    <input class="form-control mb-2" [(ngModel)]="newQty" name="qty" type="number" placeholder="Jumlah Barang" required >
     <button type="submit" class="btn btn-primary w-100">Tambah</button>
   </form>
 
-  <ul class="list-group">
-    @for (item of items; track item.id) {
-      <li class="list-group-item d-flex justify-content-between">
-        {{ item.name }} - Jumlah: {{ item.quantity }}
-        <button class="btn btn-danger btn-sm" (click)="delete(item.id)">Hapus</button>
-      </li>
+  <div class="mb-3">
+    <h5>Daftar Barang Tersimpan</h5>
+    @if (items.length === 0) {
+      <div class="alert alert-info">Belum ada barang di storage</div>
+    } @else {
+      <ul class="list-group">
+        @for (item of items; track item.id) {
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <div>
+              <strong>{{ item.name }}</strong> <br>
+              <small class="text-muted">Jumlah: {{ item.quantity }}</small>
+            </div>
+            <button class="btn btn-danger btn-sm" (click)="delete(item.id)">Hapus</button>
+          </li>
+        }
+      </ul>
+      <div class="mt-2 alert alert-primary">
+        <strong>Total Barang:</strong> {{ totalItems }}
+      </div>
     }
-  </ul>
+  </div>
 </div>
